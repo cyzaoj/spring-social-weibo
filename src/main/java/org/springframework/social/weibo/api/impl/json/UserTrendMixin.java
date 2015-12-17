@@ -15,20 +15,21 @@
  */
 package org.springframework.social.weibo.api.impl.json;
 
-import org.codehaus.jackson.annotate.JsonIgnoreProperties;
-import org.codehaus.jackson.annotate.JsonProperty;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * Annotated mixin to add Jackson annotations to UserTrend.
- * 
+ *
  * @author edva8332
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 abstract class UserTrendMixin {
 
-	String num;
-	String hotword;
-	@JsonProperty("trend_id")
-	long id;
+    String num;
+    String hotword;
+    @JsonProperty("trend_id")
+    long id;
 
 }

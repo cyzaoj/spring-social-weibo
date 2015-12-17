@@ -15,7 +15,7 @@
 */
 package org.springframework.social.weibo.api.impl;
 
-import org.codehaus.jackson.map.ObjectMapper;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Before;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
@@ -26,33 +26,33 @@ import org.springframework.web.client.RestTemplate;
 
 public abstract class AbstractWeiboOperationsTest {
 
-	protected MockRestServiceServer mockServer;
-	private WeiboTemplate weiboTemplate;
-	protected HttpHeaders responseHeaders;
+    protected MockRestServiceServer mockServer;
+    private WeiboTemplate weiboTemplate;
+    protected HttpHeaders responseHeaders;
 
-	public AbstractWeiboOperationsTest() {
-		weiboTemplate = new WeiboTemplate("accessToken");
-		mockServer = MockRestServiceServer.createServer(weiboTemplate
-				.getRestTemplate());
-		responseHeaders = new HttpHeaders();
-		responseHeaders.setContentType(MediaType.APPLICATION_JSON);
-	}
+    public AbstractWeiboOperationsTest() {
+        weiboTemplate = new WeiboTemplate("accessToken");
+        mockServer = MockRestServiceServer.createServer(weiboTemplate
+                .getRestTemplate());
+        responseHeaders = new HttpHeaders();
+        responseHeaders.setContentType(MediaType.APPLICATION_JSON);
+    }
 
-	@Before
-	public abstract void setUp();
+    @Before
+    public abstract void setUp();
 
-	protected RestTemplate getRestTemplate() {
-		return weiboTemplate.getRestTemplate();
-	}
+    protected RestTemplate getRestTemplate() {
+        return weiboTemplate.getRestTemplate();
+    }
 
-	protected ObjectMapper getObjectMapper() {
-		return weiboTemplate.getObjectMapper();
-	}
+    protected ObjectMapper getObjectMapper() {
+        return weiboTemplate.getObjectMapper();
+    }
 
-	protected Resource jsonResource(String file) {
-		ClassPathResource classPathResource = new ClassPathResource("json/"
-				+ file + ".json");
-		return classPathResource;
-	}
+    protected Resource jsonResource(String file) {
+        ClassPathResource classPathResource = new ClassPathResource("json/"
+                + file + ".json");
+        return classPathResource;
+    }
 
 }

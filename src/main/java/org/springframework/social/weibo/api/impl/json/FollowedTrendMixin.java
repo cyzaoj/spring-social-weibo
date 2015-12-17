@@ -15,18 +15,19 @@
  */
 package org.springframework.social.weibo.api.impl.json;
 
-import org.codehaus.jackson.annotate.JsonProperty;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * Annotated mixin to add Jackson annotations to FollowedTrend.
- * 
+ *
  * @author edva8332
  */
 abstract class FollowedTrendMixin {
 
-	@JsonProperty("trend_id")
-	long trendId;
-	@JsonProperty("is_follow")
-	boolean followed;
+    @JsonProperty("trend_id")
+    long trendId;
+    @JsonProperty("is_follow")
+    boolean followed;
 
 }

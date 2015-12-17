@@ -15,8 +15,8 @@
  */
 package org.springframework.social.weibo.api.impl.json;
 
-import org.codehaus.jackson.annotate.JsonIgnoreProperties;
-import org.codehaus.jackson.annotate.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.social.weibo.api.LimitTimeUnit;
 
 @JsonIgnoreProperties(ignoreUnknown = true)

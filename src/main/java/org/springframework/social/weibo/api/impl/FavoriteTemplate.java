@@ -15,10 +15,8 @@
  */
 package org.springframework.social.weibo.api.impl;
 
-import java.util.List;
-
-import org.codehaus.jackson.JsonNode;
-import org.codehaus.jackson.map.ObjectMapper;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.social.weibo.api.CursoredList;
 import org.springframework.social.weibo.api.Favorite;
 import org.springframework.social.weibo.api.Favorite.Tag;
@@ -28,126 +26,128 @@ import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.List;
+
 public class FavoriteTemplate extends AbstractWeiboOperations implements
-		FavoriteOperations {
+        FavoriteOperations {
 
-	protected FavoriteTemplate(ObjectMapper objectMapper,
-			RestTemplate restTemplate, boolean isAuthorized) {
-		super(objectMapper, restTemplate, isAuthorized);
-	}
+    protected FavoriteTemplate(ObjectMapper objectMapper,
+                               RestTemplate restTemplate, boolean isAuthorized) {
+        super(objectMapper, restTemplate, isAuthorized);
+    }
 
-	@Override
-	public Favorite createFavorite(long id) {
-		requireAuthorization();
-		MultiValueMap<String, String> request = new LinkedMultiValueMap<String, String>(
-				1);
-		request.add("id", String.valueOf(id));
-		return restTemplate.postForObject(buildUri("favorites/create.json"),
-				request, Favorite.class);
-	}
+    @Override
+    public Favorite createFavorite(long id) {
+        requireAuthorization();
+        MultiValueMap<String, String> request = new LinkedMultiValueMap<String, String>(
+                1);
+        request.add("id", String.valueOf(id));
+        return restTemplate.postForObject(buildUri("favorites/create.json"),
+                request, Favorite.class);
+    }
 
-	@Override
-	public Favorite deleteFavorite(long id) {
-		requireAuthorization();
-		MultiValueMap<String, String> request = new LinkedMultiValueMap<String, String>(
-				1);
-		request.add("id", String.valueOf(id));
-		return restTemplate.postForObject(buildUri("favorites/destroy.json"),
-				request, Favorite.class);
-	}
+    @Override
+    public Favorite deleteFavorite(long id) {
+        requireAuthorization();
+        MultiValueMap<String, String> request = new LinkedMultiValueMap<String, String>(
+                1);
+        request.add("id", String.valueOf(id));
+        return restTemplate.postForObject(buildUri("favorites/destroy.json"),
+                request, Favorite.class);
+    }
 
-	@Override
-	public boolean deleteFavorites(List<Long> ids) {
-		requireAuthorization();
-		MultiValueMap<String, String> request = new LinkedMultiValueMap<String, String>(
-				1);
-		request.add("ids", StringUtils.join(ids));
-		JsonNode jsonNode = restTemplate.postForObject(
-				buildUri("favorites/destroy_batch.json"), request,
-				JsonNode.class);
-		return jsonNode.get("result").asBoolean();
-	}
+    @Override
+    public boolean deleteFavorites(List<Long> ids) {
+        requireAuthorization();
+        MultiValueMap<String, String> request = new LinkedMultiValueMap<String, String>(
+                1);
+        request.add("ids", StringUtils.join(ids));
+        JsonNode jsonNode = restTemplate.postForObject(
+                buildUri("favorites/destroy_batch.json"), request,
+                JsonNode.class);
+        return jsonNode.get("result").asBoolean();
+    }
 
-	@Override
-	public Favorite getFavorite(long id) {
-		requireAuthorization();
-		return restTemplate.getForObject(uriBuilder("favorites/show.json")
-				.queryParam("id", String.valueOf(id)).build(), Favorite.class);
-	}
+    @Override
+    public Favorite getFavorite(long id) {
+        requireAuthorization();
+        return restTemplate.getForObject(uriBuilder("favorites/show.json")
+                .queryParam("id", String.valueOf(id)).build(), Favorite.class);
+    }
 
-	@Override
-	public CursoredList<Favorite> getFavorites() {
-		requireAuthorization();
-		JsonNode jsonNode = restTemplate.getForObject(
-				buildUri("favorites.json"), JsonNode.class);
-		return deserializeCursoredList(jsonNode, Favorite.class, "favorites");
-	}
+    @Override
+    public CursoredList<Favorite> getFavorites() {
+        requireAuthorization();
+        JsonNode jsonNode = restTemplate.getForObject(
+                buildUri("favorites.json"), JsonNode.class);
+        return deserializeCursoredList(jsonNode, Favorite.class, "favorites");
+    }
 
-	@Override
-	public CursoredList<Favorite> getFavorites(int pageSize, int pageNumber) {
-		requireAuthorization();
-		JsonNode jsonNode = restTemplate
-				.getForObject(
-						uriBuilder("favorites.json")
-								.queryParam("count", String.valueOf(pageSize))
-								.queryParam("page", String.valueOf(pageNumber))
-								.build(), JsonNode.class);
-		return deserializeCursoredList(jsonNode, Favorite.class, "favorites");
-	}
+    @Override
+    public CursoredList<Favorite> getFavorites(int pageSize, int pageNumber) {
+        requireAuthorization();
+        JsonNode jsonNode = restTemplate
+                .getForObject(
+                        uriBuilder("favorites.json")
+                                .queryParam("count", String.valueOf(pageSize))
+                                .queryParam("page", String.valueOf(pageNumber))
+                                .build(), JsonNode.class);
+        return deserializeCursoredList(jsonNode, Favorite.class, "favorites");
+    }
 
-	@Override
-	public CursoredList<Favorite> getFavoritesByTag(long tagId) {
-		requireAuthorization();
-		JsonNode jsonNode = restTemplate.getForObject(
-				uriBuilder("favorites/by_tags.json").queryParam("tid",
-						String.valueOf(tagId)).build(), JsonNode.class);
-		return deserializeCursoredList(jsonNode, Favorite.class, "favorites");
-	}
+    @Override
+    public CursoredList<Favorite> getFavoritesByTag(long tagId) {
+        requireAuthorization();
+        JsonNode jsonNode = restTemplate.getForObject(
+                uriBuilder("favorites/by_tags.json").queryParam("tid",
+                        String.valueOf(tagId)).build(), JsonNode.class);
+        return deserializeCursoredList(jsonNode, Favorite.class, "favorites");
+    }
 
-	@Override
-	public CursoredList<Favorite> getFavoritesByTag(long tagId, int pageSize,
-			int pageNumber) {
-		requireAuthorization();
-		JsonNode jsonNode = restTemplate
-				.getForObject(
-						uriBuilder("favorites/by_tags.json")
-								.queryParam("tid", String.valueOf(tagId))
-								.queryParam("count", String.valueOf(pageSize))
-								.queryParam("page", String.valueOf(pageNumber))
-								.build(), JsonNode.class);
-		return deserializeCursoredList(jsonNode, Favorite.class, "favorites");
-	}
+    @Override
+    public CursoredList<Favorite> getFavoritesByTag(long tagId, int pageSize,
+                                                    int pageNumber) {
+        requireAuthorization();
+        JsonNode jsonNode = restTemplate
+                .getForObject(
+                        uriBuilder("favorites/by_tags.json")
+                                .queryParam("tid", String.valueOf(tagId))
+                                .queryParam("count", String.valueOf(pageSize))
+                                .queryParam("page", String.valueOf(pageNumber))
+                                .build(), JsonNode.class);
+        return deserializeCursoredList(jsonNode, Favorite.class, "favorites");
+    }
 
-	@Override
-	public CursoredList<Tag> getTags() {
-		requireAuthorization();
-		JsonNode jsonNode = restTemplate.getForObject(
-				buildUri("favorites/tags.json"), JsonNode.class);
-		return deserializeCursoredList(jsonNode, Tag.class, "tags");
-	}
+    @Override
+    public CursoredList<Tag> getTags() {
+        requireAuthorization();
+        JsonNode jsonNode = restTemplate.getForObject(
+                buildUri("favorites/tags.json"), JsonNode.class);
+        return deserializeCursoredList(jsonNode, Tag.class, "tags");
+    }
 
-	@Override
-	public CursoredList<Tag> getTags(int pageSize, int pageNumber) {
-		requireAuthorization();
-		JsonNode jsonNode = restTemplate
-				.getForObject(
-						uriBuilder("favorites/tags.json")
-								.queryParam("count", String.valueOf(pageSize))
-								.queryParam("page", String.valueOf(pageNumber))
-								.build(), JsonNode.class);
-		return deserializeCursoredList(jsonNode, Tag.class, "tags");
-	}
+    @Override
+    public CursoredList<Tag> getTags(int pageSize, int pageNumber) {
+        requireAuthorization();
+        JsonNode jsonNode = restTemplate
+                .getForObject(
+                        uriBuilder("favorites/tags.json")
+                                .queryParam("count", String.valueOf(pageSize))
+                                .queryParam("page", String.valueOf(pageNumber))
+                                .build(), JsonNode.class);
+        return deserializeCursoredList(jsonNode, Tag.class, "tags");
+    }
 
-	@Override
-	public Favorite updateTags(long id, List<String> tags) {
-		requireAuthorization();
-		MultiValueMap<String, String> request = new LinkedMultiValueMap<String, String>(
-				2);
-		request.add("id", String.valueOf(id));
-		request.add("tags", StringUtils.join(tags));
-		return restTemplate
-				.postForObject(buildUri("favorites/tags/update.json"), request,
-						Favorite.class);
-	}
+    @Override
+    public Favorite updateTags(long id, List<String> tags) {
+        requireAuthorization();
+        MultiValueMap<String, String> request = new LinkedMultiValueMap<String, String>(
+                2);
+        request.add("id", String.valueOf(id));
+        request.add("tags", StringUtils.join(tags));
+        return restTemplate
+                .postForObject(buildUri("favorites/tags/update.json"), request,
+                        Favorite.class);
+    }
 
 }
