@@ -6,7 +6,17 @@
  <br>
  spring不维护了,怎么办怎么办???<br>
  
- 打开Idea ,fork代码,咋们自己撸起来,欢迎各位大神pull Request.
+ 打开Idea ,fork代码,咋们自己撸起来,欢迎各位大神pull Request. <br>
+ 
+ 现在已经可以对接最新的weibo oauth2了,后期还需要继续优化
+ 
+ 
+ #fixed issue
+ 
+ 1. 废弃了老版本的jackson,使用的是改版后的jackson
+ 2. 更新weibo相关API
+ 3. 升级social-core版本
+ 4. 相关阻塞BUG
  
 
 If you are using this project, you should probably consider to read the [term of use of Weibo](http://open.weibo.com/wiki/%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%91%E8%80%85%E5%8D%8F%E8%AE%AE)
