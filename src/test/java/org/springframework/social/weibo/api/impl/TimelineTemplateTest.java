@@ -687,7 +687,7 @@ public class TimelineTemplateTest extends AbstractWeiboOperationsTest {
 
 	private void verifyRepost(Status status) {
 		StatusMatcher.verifyStatus(status);
-		Status originalStatus = status.getOriginalStatus();
+		Status originalStatus = status.getRetweetedStatus();
 		assertEquals(1306231493000L, originalStatus.getCreatedAt().getTime());
 		assertEquals("你好", originalStatus.getText());
 	}
