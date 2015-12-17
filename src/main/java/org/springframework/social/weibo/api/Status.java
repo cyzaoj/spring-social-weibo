@@ -19,145 +19,259 @@ import java.util.Date;
 
 public class Status {
 
-	private Long id;
-	private Date createdAt;
-	private String text;
-	private String source;
-	private boolean favorited;
-	private boolean truncated;
-	private String inReplyToStatusId;
-	private String inReplyToUserId;
-	private String inReplyToScreenName;
-	private String mid;
-	private WeiboProfile user;
-	private int repostsCount;
-	private int commentsCount;
-	private Status originalStatus;
+    /**
+     * 微博ID
+     */
+    private Long id;
 
-	public Status(Long id, Date createdAt, String text, String source,
-			boolean favorited, boolean truncated, int repostsCount,
-			int commentsCount) {
-		super();
-		this.id = id;
-		this.createdAt = createdAt;
-		this.text = text;
-		this.source = source;
-		this.favorited = favorited;
-		this.truncated = truncated;
-		this.repostsCount = repostsCount;
-		this.commentsCount = commentsCount;
-	}
+    /**
+     * 微博创建时间
+     */
+    private Date createdAt;
 
-	public Long getId() {
-		return id;
-	}
+    /**
+     * 微博信息内容
+     */
+    private String text;
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    /**
+     * 微博来源
+     */
+    private String source;
 
-	public Date getCreatedAt() {
-		return createdAt;
-	}
+    /**
+     * 是否已收藏，true：是，false：否
+     */
+    private boolean favorited;
 
-	public void setCreatedAt(Date createdAt) {
-		this.createdAt = createdAt;
-	}
+    /**
+     * 是否被截断，true：是，false：否
+     */
+    private boolean truncated;
 
-	public String getText() {
-		return text;
-	}
+    /**
+     * （暂未支持）回复ID
+     */
+    private String inReplyToStatusId;
 
-	public void setText(String text) {
-		this.text = text;
-	}
+    /**
+     * （暂未支持）回复人UID
+     */
+    private String inReplyToUserId;
 
-	public String getSource() {
-		return source;
-	}
+    /**
+     * （暂未支持）回复人昵称
+     */
+    private String inReplyToScreenName;
 
-	public void setSource(String source) {
-		this.source = source;
-	}
+    /**
+     * 缩略图片地址，没有时不返回此字段
+     */
+    private String thumbnailPic;
 
-	public boolean isFavorited() {
-		return favorited;
-	}
+    /**
+     * 中等尺寸图片地址，没有时不返回此字段
+     */
+    private String bmiddlePic;
 
-	public void setFavorited(boolean favorited) {
-		this.favorited = favorited;
-	}
+    /**
+     * 原始图片地址，没有时不返回此字段
+     */
+    private String originalPic;
 
-	public boolean isTruncated() {
-		return truncated;
-	}
+    private Geo geo;
 
-	public void setTruncated(boolean truncated) {
-		this.truncated = truncated;
-	}
+    /**
+     * 微博MID
+     */
+    private String mid;
 
-	public String getInReplyToStatusId() {
-		return inReplyToStatusId;
-	}
+    /**
+     * 微博作者的用户信息字段
+     */
+    private WeiboProfile user;
 
-	public void setInReplyToStatusId(String inReplyToStatusId) {
-		this.inReplyToStatusId = inReplyToStatusId;
-	}
+    /**
+     * 转发数
+     */
+    private int repostsCount;
 
-	public String getInReplyToUserId() {
-		return inReplyToUserId;
-	}
+    /**
+     * 评论数
+     */
+    private int commentsCount;
 
-	public void setInReplyToUserId(String inReplyToUserId) {
-		this.inReplyToUserId = inReplyToUserId;
-	}
+    /**
+     * 表态数
+     */
+    private int attitudesCount;
+    private Status retweetedStatus;
 
-	public String getInReplyToScreenName() {
-		return inReplyToScreenName;
-	}
 
-	public void setInReplyToScreenName(String inReplyToScreenName) {
-		this.inReplyToScreenName = inReplyToScreenName;
-	}
+    public Status(Long id, Date createdAt, String text, String source,
+                  boolean favorited, boolean truncated, int repostsCount,
+                  int commentsCount) {
+        super();
+        this.id = id;
+        this.createdAt = createdAt;
+        this.text = text;
+        this.source = source;
+        this.favorited = favorited;
+        this.truncated = truncated;
+        this.repostsCount = repostsCount;
+        this.commentsCount = commentsCount;
+    }
 
-	public String getMid() {
-		return mid;
-	}
+    public Long getId() {
+        return id;
+    }
 
-	public void setMid(String mid) {
-		this.mid = mid;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public int getRepostsCount() {
-		return repostsCount;
-	}
+    public Date getCreatedAt() {
+        return createdAt;
+    }
 
-	public void setRepostsCount(int repostsCount) {
-		this.repostsCount = repostsCount;
-	}
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
+    }
 
-	public int getCommentsCount() {
-		return commentsCount;
-	}
+    public String getText() {
+        return text;
+    }
 
-	public void setCommentsCount(int commentsCount) {
-		this.commentsCount = commentsCount;
-	}
+    public void setText(String text) {
+        this.text = text;
+    }
 
-	public WeiboProfile getUser() {
-		return user;
-	}
+    public String getSource() {
+        return source;
+    }
 
-	public void setUser(WeiboProfile user) {
-		this.user = user;
-	}
+    public void setSource(String source) {
+        this.source = source;
+    }
 
-	public Status getOriginalStatus() {
-		return originalStatus;
-	}
+    public boolean isFavorited() {
+        return favorited;
+    }
 
-	public void setOriginalStatus(Status repost) {
-		this.originalStatus = repost;
-	}
+    public void setFavorited(boolean favorited) {
+        this.favorited = favorited;
+    }
 
+    public boolean isTruncated() {
+        return truncated;
+    }
+
+    public void setTruncated(boolean truncated) {
+        this.truncated = truncated;
+    }
+
+    public String getInReplyToStatusId() {
+        return inReplyToStatusId;
+    }
+
+    public void setInReplyToStatusId(String inReplyToStatusId) {
+        this.inReplyToStatusId = inReplyToStatusId;
+    }
+
+    public String getInReplyToUserId() {
+        return inReplyToUserId;
+    }
+
+    public void setInReplyToUserId(String inReplyToUserId) {
+        this.inReplyToUserId = inReplyToUserId;
+    }
+
+    public String getInReplyToScreenName() {
+        return inReplyToScreenName;
+    }
+
+    public void setInReplyToScreenName(String inReplyToScreenName) {
+        this.inReplyToScreenName = inReplyToScreenName;
+    }
+
+    public String getMid() {
+        return mid;
+    }
+
+    public void setMid(String mid) {
+        this.mid = mid;
+    }
+
+    public int getRepostsCount() {
+        return repostsCount;
+    }
+
+    public void setRepostsCount(int repostsCount) {
+        this.repostsCount = repostsCount;
+    }
+
+    public int getCommentsCount() {
+        return commentsCount;
+    }
+
+    public void setCommentsCount(int commentsCount) {
+        this.commentsCount = commentsCount;
+    }
+
+    public WeiboProfile getUser() {
+        return user;
+    }
+
+    public void setUser(WeiboProfile user) {
+        this.user = user;
+    }
+
+    public Status getRetweetedStatus() {
+        return retweetedStatus;
+    }
+
+    public void setRetweetedStatus(Status retweetedStatus) {
+        this.retweetedStatus = retweetedStatus;
+    }
+
+    public Geo getGeo() {
+        return geo;
+    }
+
+    public void setGeo(Geo geo) {
+        this.geo = geo;
+    }
+
+
+    public String getThumbnailPic() {
+        return thumbnailPic;
+    }
+
+    public void setThumbnailPic(String thumbnailPic) {
+        this.thumbnailPic = thumbnailPic;
+    }
+
+    public String getBmiddlePic() {
+        return bmiddlePic;
+    }
+
+    public void setBmiddlePic(String bmiddlePic) {
+        this.bmiddlePic = bmiddlePic;
+    }
+
+    public String getOriginalPic() {
+        return originalPic;
+    }
+
+    public void setOriginalPic(String originalPic) {
+        this.originalPic = originalPic;
+    }
+
+    public int getAttitudesCount() {
+        return attitudesCount;
+    }
+
+    public void setAttitudesCount(int attitudesCount) {
+        this.attitudesCount = attitudesCount;
+    }
 }

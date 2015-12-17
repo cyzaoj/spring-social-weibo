@@ -49,13 +49,18 @@ public class WeiboProfile {
 	private boolean verified; // 加V标示，是否微博认证用户
 	private String verifiedReason; // 认证原因
 
-	public WeiboProfile(Long id, String screename, String name, String url,
+	/**
+	 * 是否允许标识用户的地理位置，true：是，false：否
+	 */
+	private boolean geoEnabled;
+
+	public WeiboProfile(Long id, String screeName, String name, String url,
 			String profileImageUrl, String description, String location,
 			Date createAt) {
 		this.id = id;
 		this.name = name;
 		this.url = url;
-		this.screenName = screename;
+		this.screenName = screeName;
 		this.profileImageUrl = profileImageUrl;
 		this.description = description;
 		this.location = location;
@@ -384,6 +389,14 @@ public class WeiboProfile {
 
 	public void setVerified_reason(String verifiedReason) {
 		this.verifiedReason = verifiedReason;
+	}
+
+	public boolean isGeoEnabled() {
+		return geoEnabled;
+	}
+
+	public void setGeoEnabled(boolean geoEnabled) {
+		this.geoEnabled = geoEnabled;
 	}
 
 	@Override
