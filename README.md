@@ -27,7 +27,7 @@ In order to get started with spring-social-weibo, you have to follow only 3 simp
 
 ## Step 1: Get the code from GitHub
 
-git clone --recursive git://github.com/vergnes/spring-social-weibo.git
+git clone --recursive https://github.com/cyzaoj/spring-social-weibo.git
 
 ## Step 2: Use Maven to build project
 
@@ -39,7 +39,7 @@ mvn clean install
 	<dependency>
 	    <groupId>org.springframework.social</groupId>
 	    <artifactId>spring-social-weibo</artifactId>
-        <version>1.0.1-SNAPSHOT</version>
+        <version>1.0.1-beta1</version>
     </dependency>
 
 # License
