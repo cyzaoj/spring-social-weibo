@@ -8,7 +8,7 @@
  
  打开Idea ,fork代码,咋们自己撸起来,欢迎各位大神pull Request. <br>
  
- 现在已经可以对接最新的weibo oauth2了,后期还需要继续优化
+ 现在已经可以对接最新的weibo oauth2了,代码结构未发生变化,后期还需要继续优化
  
  
  #fixed issue
