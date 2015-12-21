@@ -44,8 +44,17 @@ public class WeiboOAuth2Template extends OAuth2Template {
 
     public WeiboOAuth2Template(String clientId, String clientSecret) {
         super(clientId, clientSecret,
-                "https://api.t.sina.com.cn/oauth2/authorize",
-                "https://api.t.sina.com.cn/oauth2/access_token");
+               /* "https://api.t.sina.com.cn/oauth2/authorize",
+                "https://api.t.sina.com.cn/oauth2/access_token"*/
+                "https://api.weibo.com/oauth2/authorize",
+                "https://api.weibo.com/oauth2/access_token"
+        );
+
+        //默认设置为true,如果是false讲会导致一个问题在验证/oauth2/access_token请求的时候
+        //不传递client_secret,client_id两个参数导致验证失败
+        //具体影响代码范围请见AccessGrant.exchangeForAccess方法
+        //参考文献: http://open.weibo.com/wiki/Oauth2/access_token
+        setUseParametersForClientAuthentication(true);
     }
 
     @Override
