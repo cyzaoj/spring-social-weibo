@@ -76,8 +76,7 @@ public class WeiboOAuth2Template extends OAuth2Template {
                     HttpInputMessage inputMessage) throws IOException,
                     HttpMessageNotReadableException {
 
-                TypeReference<Map<String, ?>> mapType = new TypeReference<Map<String, ?>>() {
-                };
+                TypeReference<Map<String, ?>> mapType = new TypeReference<Map<String, ?>>() {};
                 LinkedHashMap<String, ?> readValue = objectMapper.readValue(
                         inputMessage.getBody(), mapType);
                 LinkedMultiValueMap<String, String> result = new LinkedMultiValueMap<String, String>();
